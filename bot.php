@@ -30,9 +30,9 @@ else{
         "from_chat_id" => $chat_id,
         "message_id" => $message_id,
         "chat_id" => $admin
-    ])
+    ]);
     bot("SendMessage",[
         "chat_id" => $chat_id,
         "text" => "Your Message Has Been Send !"
-    ])
+    ]);
 }
