@@ -6,7 +6,7 @@ $message_id = $message->message_id;
 $chat_id = $message->chat->id;
 $text = $message->text;
 
-define('TOKEN' , "1975042900:AAFJQPby8twN61oYhvASyaZW6ejYxmm2boU")
+define('TOKEN' , "1975042900:AAFJQPby8twN61oYhvASyaZW6ejYxmm2boU");
 $admin = 799041666;
 
 function bot($method, $data){
