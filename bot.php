@@ -12,7 +12,7 @@ $admin = 799041666;
 function bot($method, $data){
     $api = "https://api.telegram.org/bot". TOKEN ."/$method";
     $curl = curl_init($api);
-    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($curl, CURLOPT_RETURNSFER, true);
     curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
     $res = curl_exec($curl);
     return json_decode($res);
@@ -20,18 +20,18 @@ function bot($method, $data){
 }
 
 if($text = "/start" || "/Start"){
-    bot('sendmessage',[
+    bot('SendMessage',[
         'chat_id' => $chat_id,
         'text' => "Hi Send Your Message"
     ]);
 }
 else{
-    bot("forwardmessage",[
+    bot("ForwardMessage",[
         "from_chat_id" => $chat_id,
         "message_id" => $message_id,
         "chat_id" => $admin
     ]);
-    bot("sendmessage",[
+    bot("SendMessage",[
         "chat_id" => $chat_id,
         "text" => "Your Message Has Been Send !"
     ]);
