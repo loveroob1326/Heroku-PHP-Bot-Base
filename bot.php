@@ -1,74 +1,38 @@
 <?php
 
-/*
-شما میتوانید سورس کد خود را در این فایل قرار داده و محتویات این اسکریپت را حذف نمایید
-*/
+$update = json_decode(file_get_contents('php://input'));
+$message = $update->message;
+$message_id = $message->message_id;
+$chat_id = $message->chat->id;
+$text = $message->text;
 
-//دریافت تمامی ورودی ها
-$var = file_get_contents("php://input");
-//تبدیل ورودی ها به آرایه
-$var = json_decode($var,true);
-//دریافت شناسه چت
-$chat_id = $var['message']['chat']['id'];
-//دریافت پیام ارسال شده توسط کاربر
-$text = $var['message']['text'];
-//تعریف توکن ربات
-$token = "********"; // توکن را وارد نمایید
+define('TOKEN' , "1975042900:AAFJQPby8twN61oYhvASyaZW6ejYxmm2boU")
+$admin = 799041666;
 
+function bot($method, $data){
+    $api = "https://api.telegram.org/bot". TOKEN ."/$method";
+    $curl = curl_init($api);
+    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
+    $res = curl_exec($curl);
+    return json_decode($res);
 
-//این تابع یک پیام ساده ارسال میکند
-function sendMessage($chat_id,$text)
-{
-	global $token;
-    $api    = "https://api.telegram.org/bot$token/";
-    $method = "sendMessage";
-    $params = "?chat_id=$chat_id&text=" . urlencode($text);
-  
-  	$url = $api . $method . $params;
-    $result = file_get_contents($url);
-  	return $result;
-}
-//این تابع یک پیام به همراه کیبورد ساده ارسال میکند
-function sendMessageWithKeyboard($chat_id,$text,$reply_markup)
-{
-	global $token;
-    $api    = "https://api.telegram.org/bot$token/";
-    $method = "sendMessage";
-    $params = "?chat_id=$chat_id&text=" . urlencode($text);
-    $params .= "&reply_markup=" . json_encode($reply_markup);
-  
-  	$url = $api . $method . $params;
-    $result = file_get_contents($url);
-  	return $result;
-}
-//تعریف  دکمه های کیبورد
-$keyboard_button = array( ['Button 1','Button 2'] );
-//تعریف کیبورد
-$keyboard = array(
-	'keyboard'			=>	$keyboard_button,
-	'resize_keyboard'	=>	true,
-);
-/*
-اگر پیام دریافتی از کاربر برابر :
-/start
-باشد، این خروجی داده خواهد شد
-*/
-if ( $text == '/start' ) 
-{
-	$message = "Hi There, Welcome...";
-	echo sendMessageWithKeyboard($chat_id,$message,$keyboard);
-}
-//اگر دکمه شماره 1 فشرده شود
-if ( $text == 'Button 1' ) 
-{
-	$message = "Result From Button 1";
-	echo sendMessage($chat_id,$message);
-}
-//اگر دکمه شماره 2 فشرده شود
-if ( $text == 'Button 2' ) 
-{
-	$message = "Result From Button 2";
-	sendMessage($chat_id,$message);
 }
 
-?>
+if($text = "/start" || "/Start" || explode(' ', $text))){
+    bot('SendMessage',[
+        'chat_id' => $chat_id,
+        'text' => "Hi Send Your Message"
+    ]);
+}
+else{
+    bot("ForwardMessage",[
+        "from_chat_id" => $chat_id,
+        "message_id" => $message_id,
+        "chat_id" => $admin
+    ])
+    bot("SendMessage",[
+        "chat_id" => $chat_id,
+        "text" => "Your Message Has Been Send !"
+    ])
+}
