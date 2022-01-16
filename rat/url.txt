@@ -1,1 +1,1 @@
-https://ratbaby.herokuapp.com
+https://ratbaby.herokuapp.com/rat
